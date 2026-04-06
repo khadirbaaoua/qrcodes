@@ -46,15 +46,17 @@
 
   <button onclick="playAudio()">▶️ Lancer le son</button>
 
-  <audio id="audio" controls>
-    <source src="https://drive.google.com/uc?export=open&id=1ibZAdLumceO0Cf3iCkGSSszX1W0TgRIW" type="audio/mpeg">
+  <audio id="audio" controls preload="none" playsinline>
+    <source src="https://drive.usercontent.google.com/download?id=1ibZAdLumceO0Cf3iCkGSSszX1W0TgRIW&export=download&confirm=t" type="audio/mpeg">
+    <source src="https://drive.google.com/uc?export=download&id=1ibZAdLumceO0Cf3iCkGSSszX1W0TgRIW" type="audio/mpeg">
   </audio>
 </div>
 
 <script>
   function playAudio() {
     const audio = document.getElementById('audio');
-    audio.play();
+    audio.load();
+    void audio.play();
   }
 </script>
 
