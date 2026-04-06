@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Audio 03</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .player {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    audio {
+      width: 100%;
+      margin-top: 20px;
+    }
+    .drive-embed {
+      margin-top: 16px;
+      width: 100%;
+      border: 0;
+      border-radius: 8px;
+      min-height: 220px;
+      background: #fafafa;
+    }
+    .embed-hint {
+      margin: 12px 0 0;
+      font-size: 14px;
+      color: #555;
+    }
+    [hidden] {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+<div class="player">
+  <h2>🎧 Son 03</h2>
+
+  <div id="native-wrap">
+    <button type="button" onclick="playAudio()">▶️ Lancer le son</button>
+    <audio id="audio" controls preload="none" playsinline>
+      <source src="https://drive.usercontent.google.com/download?id=1kd6agGi49lxnZZuqYh_HMwt6_O_W0sGF&export=download&confirm=t">
+      <source src="https://drive.google.com/uc?export=download&id=1kd6agGi49lxnZZuqYh_HMwt6_O_W0sGF">
+      <source src="https://docs.google.com/uc?export=download&id=1kd6agGi49lxnZZuqYh_HMwt6_O_W0sGF">
+    </audio>
+  </div>
+
+  <div id="embed-wrap" hidden>
+    <p class="embed-hint">Appuyez sur lecture dans le lecteur ci‑dessous.</p>
+    <iframe class="drive-embed"
+            title="Lecture audio"
+            src="https://drive.google.com/file/d/1kd6agGi49lxnZZuqYh_HMwt6_O_W0sGF/preview"
+            allow="autoplay; fullscreen; encrypted-media"
+            allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var ua = navigator.userAgent || '';
+    var isIOSLike = /iPad|iPhone|iPod/.test(ua)
+        || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var forceEmbed = /[?&]embed=1(?:&|$)/.test(location.search);
+    if (isIOSLike || forceEmbed) {
+      document.getElementById('native-wrap').hidden = true;
+      document.getElementById('embed-wrap').hidden = false;
+    }
+  })();
+
+  function playAudio() {
+    var audio = document.getElementById('audio');
+    if (!audio || audio.closest('[hidden]')) return;
+    audio.load();
+    void audio.play();
+  }
+</script>
+
+</body>
+</html>
